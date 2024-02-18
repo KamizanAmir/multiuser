@@ -9,9 +9,37 @@ use Illuminate\Support\Carbon;
 
 class EmployeeController extends Controller
 {
+    public function index()
+    {
+        $employees = User::where('role', 3)->get();
+        return view('manage-employee', compact('employees'));
+    }
+    public function edit($id)
+    {
+        $employee = User::findOrFail($id);
+        return view('employees.edit', compact('employee'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $employee = User::findOrFail($id);
+        // Perform validation if necessary
+        $employee->update($request->all());
+        return redirect()->route('manage-employee.index')->with('status', 'Employer updated successfully!');
+    }
+    
+
+    public function destroy($id)
+    {
+        $employee = User::findOrFail($id);
+        $employee->delete();
+        // Redirect to manage employee view with a success message
+    }
+
+
     public function create()
     {
-        // Return the view with the form to add a trainer
+        // Return the view with the form to add a employee
         return view('add-employee');
     }
 

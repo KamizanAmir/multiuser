@@ -1,54 +1,103 @@
-<!-- sidebar.blade.php -->
 @if(auth()->check()) <!-- Check if the user is authenticated -->
 <style>
-        .child-link {
-            font-size: 0.9em; /* Smaller font size */
-            padding-left: 30px; /* Increase indentation to accommodate lines */
-            position: relative; /* Needed for absolute positioning of pseudo-elements */
-            text-align: left; /* Align text to the left */
-        }
+    /* General sidebar styles */
+    .sidebar {
+        float: left;
+        width: 200px;
+        height: 100vh;
+        background: #333; /* Darker shade for a more modern look */
+        padding: 20px;
+        border-radius: 5px;
+    }
 
-        .child-link:before {
-            content: ''; /* Add content for the pseudo-element */
-            position: absolute;
-            top: 0;
-            left: 10px; /* Position to the left of the text */
-            height: 100%; /* Extend the line to full height of the element */
-            border-left: 1px solid #fff; /* Create the line */
-        }
+    .sidebar a {
+        display: block;
+        color: #ddd; /* Lighter text for contrast */
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 4px;
+        transition: background-color 0.3s; /* Smooth background transition */
+    }
 
-        .child-link:after {
-            content: ''; /* Add content for the pseudo-element */
-            position: absolute;
-            top: 50%;
-            left: 10px; /* Position to the left of the line */
-            width: 10px; /* Width of the horizontal line */
-            border-bottom: 1px solid #fff; /* Create the horizontal line */
-            transform: translateY(-50%); /* Center vertically */
-        }
+    .sidebar a:hover {
+        background-color: #444; /* Slightly lighter on hover */
+    }
 
-        #additional-links a:first-child:before {
-            top: 50%; /* Start the line from the middle of the first child */
-        }
+    .sidebar .user-info {
+        margin-bottom: 30px; /* Increased space from the username to the menu */
+        padding-bottom: 10px;
+        border-bottom: 1px solid #555; /* Divider below the username */
+        color: #fff;
+    }
 
-        #additional-links a:last-child:before {
-            height: 50%; /* End the line at the middle of the last child */
-        }
+    .child-link {
+        font-size: 0.9em;
+        padding-left: 30px;
+        text-align: left;
+        position: relative;
+    }
 
-        #more-btn:after {
-            content: '\f0d7'; /* FontAwesome down arrow */
-            font-family: 'Font Awesome 5 Free'; /* Specify the font family for FontAwesome */
-            position: absolute;
-            right: 10px; /* Position to the right of the text */
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: 900; /* Required for FontAwesome solid icons */
-        }
+    .child-link:before,
+    .child-link:after {
+        content: '';
+        position: absolute;
+        border-color: #777; /* Subtle lines for elegance */
+    }
+
+    .child-link:before {
+        top: 0;
+        left: 15px;
+        height: 100%;
+        border-left: 1px solid;
+    }
+
+    .child-link:after {
+        top: 50%;
+        left: 15px;
+        width: 10px;
+        border-bottom: 1px solid;
+        transform: translateY(-50%);
+    }
+
+    #additional-links a {
+        margin-left: 15px; /* Indent child links */
+        border-left: 3px solid #777; /* Visible divider for child links */
+        padding-left: 25px;
+    }
+
+    #more-btn:after {
+        content: '\f0d7';
+        font-family: 'Font Awesome 5 Free';
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 900;
+    }
+
+    /* Logout button specific styles */
+    .logout-btn {
+        background-color: #d9534f; /* Bootstrap 'btn-danger' color */
+        color: white;
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px; /* Additional space from the last link */
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .logout-btn:hover {
+        background-color: #c9302c; /* Darken on hover */
+    }
+
 </style>
-<div class="sidebar" style="float: left; width: 200px; height: 100vh; background: grey; padding: 20px; border-radius: 5px;">
+<div class="sidebar">
     <!-- Display User Info with Profile Icon -->
-    <div class="user-info" style="margin-bottom: 20px; color: #fff;">
-        <i class="fas fa-user-circle"></i> <p style="display: inline;">{{ auth()->user()->name }}</p>
+    <div class="user-info">
+        <i class="fas fa-user-circle"></i> <span>{{ auth()->user()->name }}</span>
     </div>
 
     <!-- Sidebar Links -->
@@ -73,11 +122,9 @@
             </a>
         </div>
 
-        <a href="{{ route('logout') }}"
-           onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();" style="display: block; margin-bottom: 10px; color: white;">
-            <i class="fa fa-minus-circle" style="color: red;"></i> Logout
-        </a>
+        <button class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="fa fa-minus-circle"></i> Logout
+    </button>
     @elseif(auth()->user()->role == '2')
         <!-- Admin Links -->
         <!-- Admin Links -->

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Middleware\Employee;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,11 @@ Route::get('/manage-trainer', [TrainerController::class, 'index'])->name('manage
 Route::get('/trainers/{trainer}/edit', [TrainerController::class, 'edit'])->name('trainers.edit');
 Route::put('/trainers/{trainer}', [TrainerController::class, 'update'])->name('trainers.update');
 Route::delete('/trainers/{trainer}', [TrainerController::class, 'destroy'])->name('trainers.destroy');
-
+// This for Admin to view, edit, delete
+Route::get('/manage-employee', [EmployeeController::class, 'index'])->name('manage-employee.index');
+Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
 
 Auth::routes();

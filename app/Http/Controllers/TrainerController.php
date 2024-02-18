@@ -23,8 +23,11 @@ class TrainerController extends Controller
     public function update(Request $request, $id)
     {
         $trainer = User::findOrFail($id);
-        // Validate and update the trainer
+        // Perform validation if necessary
+        $trainer->update($request->all());
+        return redirect()->route('manage-trainer.index')->with('status', 'Trainer updated successfully!');
     }
+    
 
     public function destroy($id)
     {
