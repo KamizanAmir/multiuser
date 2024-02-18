@@ -30,7 +30,7 @@
                     var statusMessage = "{{ session('status') }}";
                     Swal.fire({
                         icon: 'success',
-                        title: 'Success!',
+                        title: 'Success edit!',
                         text: statusMessage,
                         showConfirmButton: false,
                         timer: 1500

@@ -25,7 +25,7 @@
                                     <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        <button type="button" onclick="confirmDeletion(this)" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -37,4 +37,13 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmDeletion(element) {
+        // Show a confirmation dialog
+        if (confirm('Are you sure you want to delete this employee?')) {
+            // Find the parent form and submit it
+            element.closest('form').submit();
+        }
+    }
+</script>
 @endsection

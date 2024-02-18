@@ -34,6 +34,7 @@ class EmployeeController extends Controller
         $employee = User::findOrFail($id);
         $employee->delete();
         // Redirect to manage employee view with a success message
+        return redirect('/manage-employee')->with('success', 'Employee deleted successfully');
     }
 
 

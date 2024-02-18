@@ -33,7 +33,8 @@ class TrainerController extends Controller
     {
         $trainer = User::findOrFail($id);
         $trainer->delete();
-        // Redirect to manage trainers view with a success message
+        // Redirect to manage employee view with a success message
+        return redirect('/manage-employee')->with('success', 'Employee deleted successfully');
     }
 
 
